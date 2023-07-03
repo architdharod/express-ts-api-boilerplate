@@ -20,6 +20,7 @@ dotenv.config({ path: envPath });
 // Define your environment variables
 const envVar = {
   port: <string>process.env.PORT,
+
   // ... add more variables as needed
 };
 

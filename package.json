@@ -7,7 +7,9 @@
     "start": "echo \"Error: no production script specified\" && exit 1",
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "NODE_ENV=development tsc && node ./build/app",
-    "debug": "export DEBUG=* && npm run dev"
+    "debug": "export DEBUG=* && npm run dev",
+    "dev-windows": "tsc && node ./build/app",
+    "debug-windows": "set DEBUG=* && npm run dev-windows"
   },
   "author": "archit.dharod@pflanzmich.de",
   "license": "ISC",
