@@ -27,7 +27,7 @@ process.on('SIGINT', () => {
 // App configuration
 const app = express();
 const server: http.Server = http.createServer(app);
-app.use(helmet);
+app.use(helmet());
 app.use(cors());
 
 //Routs configuration
