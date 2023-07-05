@@ -10,6 +10,8 @@ import Debug from 'debug';
 
 // variables import
 import envVar from './config';
+import { CommonRoutesConfig } from './routes/commonRoutesConfig';
+import { FreshdeskFooterRoutes } from './routes/FreshdeskFooterRoutes';
 
 // Debug configuration
 const debug: Debug.IDebugger = Debug('app.ts');
@@ -28,6 +30,10 @@ const server: http.Server = http.createServer(app);
 app.use(helmet);
 app.use(cors());
 
+//Routs configuration
+const routes: Array<CommonRoutesConfig> = [];
+routes.push(new FreshdeskFooterRoutes(app));
+
 // Test endpoint
 app.get('/', (req, res) => {
   res.status(200).send('This is working');
@@ -35,5 +41,8 @@ app.get('/', (req, res) => {
 
 // Server activation
 server.listen(envVar.port, () => {
+  routes.forEach((route: CommonRoutesConfig) => {
+    debug(`Routes configured for ${route.getName()}`);
+  });
   debug(`server is listning on port: ${envVar.port}`);
 });

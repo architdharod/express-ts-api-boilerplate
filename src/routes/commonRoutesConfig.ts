@@ -17,7 +17,9 @@ export abstract class CommonRoutesConfig {
     this.configureRoutes();
   }
 
-  // implement getName() if needed
+  getName() {
+    return this.name;
+  }
 
   abstract configureRoutes(): express.Application;
 }
