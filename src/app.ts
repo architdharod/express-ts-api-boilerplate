@@ -2,11 +2,16 @@
 // TODO: logging
 
 // modules import
+import 'reflect-metadata';
 import express from 'express';
 import * as http from 'http';
 import cors from 'cors';
 import helmet from 'helmet';
 import Debug from 'debug';
+import ContainerConfig from './config/containerConfig';
+
+//Configure Tsyringe containers
+ContainerConfig.configure();
 
 // variables import
 import envVar from './config';

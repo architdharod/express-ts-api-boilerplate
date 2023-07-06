@@ -1,13 +1,10 @@
+import 'reflect-metadata';
 import { FreshdeskFooterController } from '../controllers/FreshdeskController';
-import { FreshdeskFooterService } from '../services/FreshdeskFooterService';
 import { CommonRoutesConfig } from './commonRoutesConfig';
 import express from 'express';
+import { container } from 'tsyringe';
 
-//injecting the services in the Controller
-const freshdeskFooterService = new FreshdeskFooterService();
-const freshdeskFooterController = new FreshdeskFooterController(
-  freshdeskFooterService
-);
+const freshdeskFooterController = container.resolve(FreshdeskFooterController);
 
 export class FreshdeskFooterRoutes extends CommonRoutesConfig {
   constructor(app: express.Application) {

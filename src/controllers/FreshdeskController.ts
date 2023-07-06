@@ -1,22 +1,26 @@
-import { Express, Request, Response } from 'express';
+import { Request, Response } from 'express';
 import { IFreshdeskFooterService } from '../services/IFreshdeskFooterService';
+import { injectable, inject } from 'tsyringe';
 
+@injectable()
 export class FreshdeskFooterController {
-  private freshdeskService;
+  private _freshdeskService: IFreshdeskFooterService;
 
-  constructor(freshdeskService_: IFreshdeskFooterService) {
-    this.freshdeskService = freshdeskService_;
-    this.getAgentFooter = this.getAgentFooter.bind(this); //TODO: Find a better way to do this
+  constructor(
+    @inject('FooterService') freshdeskService: IFreshdeskFooterService
+  ) {
+    this._freshdeskService = freshdeskService;
   }
 
-  async getAgentFooter(req: Request, res: Response) {
+  getAgentFooter = async (req: Request, res: Response) => {
     const idParam = parseInt(req.params.id);
 
     if (isNaN(idParam)) {
       //throw error!
     }
-    const testResponse = await this.freshdeskService.getAgentFooter(idParam);
+
+    const testResponse = await this._freshdeskService.getAgentFooter(idParam);
 
     res.send(testResponse);
-  }
+  };
 }
