@@ -19,7 +19,7 @@ import ContainerConfig from './config/containerConfig';
 ContainerConfig.configure();
 
 // variables import
-import envVar from './config';
+import envVar from './config/environmentVariables';
 import { CommonRoutesConfig } from './routes/commonRoutesConfig';
 import { FreshdeskFooterRoutes } from './routes/FreshdeskFooterRoutes';
 
