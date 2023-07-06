@@ -1,5 +1,10 @@
-// TODO: Setup Docker
-// TODO: logging
+//TODO: implement the freshdesk Footer functionality
+//TODO: set up middleware for authentication
+//TODO: set up middleware for checking requrest
+//TODO: Check how well the code aligns with SOLID principles
+//TODO: Setup Docker
+//TODO: logging
+//TODO: Tests :)
 
 // modules import
 import 'reflect-metadata';

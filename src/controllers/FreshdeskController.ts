@@ -14,13 +14,15 @@ export class FreshdeskFooterController {
 
   getAgentFooter = async (req: Request, res: Response) => {
     const idParam = parseInt(req.params.id);
-
     if (isNaN(idParam)) {
       //throw error!
     }
-
-    const testResponse = await this._freshdeskService.getAgentFooter(idParam);
-
+    const testResponse = await this._freshdeskService.getFooterByID(idParam);
     res.send(testResponse);
+  };
+
+  getAllFooters = async (req: Request, res: Response) => {
+    const responseFooters = await this._freshdeskService.getAllFooters();
+    res.send(responseFooters);
   };
 }

@@ -11,9 +11,14 @@ export class FreshdeskFooterRoutes extends CommonRoutesConfig {
     super(app, 'FreshdeskFooter');
   }
 
+  //The parent class calls this method in constructure
   configureRoutes() {
-    this.app.route('/agent/:id').get(freshdeskFooterController.getAgentFooter);
-
+    this.app
+      .route('/agents/:id/footer')
+      .get(freshdeskFooterController.getAgentFooter);
+    this.app
+      .route('/agents/footer')
+      .get(freshdeskFooterController.getAllFooters);
     return this.app;
   }
 }
