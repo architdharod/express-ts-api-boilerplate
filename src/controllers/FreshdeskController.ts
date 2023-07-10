@@ -25,4 +25,9 @@ export class FreshdeskFooterController {
     const responseFooters = await this._freshdeskService.getAllFooters();
     res.send(responseFooters);
   };
+
+  putAllFooters = async (req: Request, res: Response) => {
+    //call the relavent service here
+    res.send('footer changed');
+  };
 }

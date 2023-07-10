@@ -20,7 +20,8 @@ dotenv.config({ path: envPath });
 // Define your environment variables
 const envVar = {
   port: <string>process.env.PORT,
-
+  freshdeskApiUsername: <string>process.env.FRESHDESK_API_USERNAME,
+  freshdeskApiPassword: <string>process.env.FRESHDESK_API_PASSWORD,
   // ... add more variables as needed
 };
 
