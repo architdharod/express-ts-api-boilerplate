@@ -30,8 +30,8 @@ const debug: Debug.IDebugger = Debug('app.ts');
 const process = require('process');
 
 process.on('SIGINT', () => {
-  debug('SIGINT event detected. Exiting...');
-  process.exit(0);
+    debug('SIGINT event detected. Exiting...');
+    process.exit(0);
 });
 
 // App configuration
@@ -46,13 +46,13 @@ routes.push(new FreshdeskFooterRoutes(app));
 
 // Test endpoint
 app.get('/', (req, res) => {
-  res.status(200).send('This is working');
+    res.status(200).send('This is working');
 });
 
 // Server activation
 server.listen(envVar.port, () => {
-  routes.forEach((route: CommonRoutesConfig) => {
-    debug(`Routes configured for ${route.getName()}`);
-  });
-  debug(`server is listning on port: ${envVar.port}`);
+    routes.forEach((route: CommonRoutesConfig) => {
+        debug(`Routes configured for ${route.getName()}`);
+    });
+    debug(`server is listning on port: ${envVar.port}`);
 });
