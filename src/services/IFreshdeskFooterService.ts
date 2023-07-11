@@ -5,6 +5,7 @@ export interface IFreshdeskFooterService {
 
     getAllFooters(): Promise<string>;
 
-    //putAgentFooter(): Promise<string>;
-    //putAllFooters(footerHTML: string): Promise<string>;
+    putAgentFooter(agentId: number, signature: string): Promise<void>;
+
+    putAllFooters(footer: string): Promise<any>;
 }

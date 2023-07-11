@@ -6,6 +6,22 @@ import { freshdesk_api_base_url, freshdeskAuth, freshdeskHeaders } from '../conf
 import { FreshdeskAgent } from '../config/types';
 
 export class FreshdeskApiService implements IFreshdeskApiService {
+    async getAgentFooterByID(id: number): Promise<string> {
+        try {
+            const response = await axios.get(`${freshdesk_api_base_url}/api/v2/agents/${id}`, {
+                headers: freshdeskHeaders,
+                auth: freshdeskAuth,
+            });
+
+            if (!('signature' in response.data)) {
+                throw new Error('Response data does not have an id field');
+            }
+            return response.data.signature;
+        } catch (error) {
+            throw error;
+        }
+    }
+
     async getAllAgents(): Promise<FreshdeskAgent[]> {
         try {
             const response = await axios.get(`${freshdesk_api_base_url}/api/v2/agents?per_page=100`, {
