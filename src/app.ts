@@ -14,6 +14,7 @@ import cors from 'cors';
 import helmet from 'helmet';
 import Debug from 'debug';
 import ContainerConfig from './config/containerConfig';
+import { container } from 'tsyringe';
 
 //Configure Tsyringe containers
 ContainerConfig.configure();
@@ -22,7 +23,9 @@ ContainerConfig.configure();
 import envVar from './config/environmentVariables';
 import { CommonRoutesConfig } from './routes/commonRoutesConfig';
 import { FreshdeskFooterRoutes } from './routes/FreshdeskFooterRoutes';
+import { IErrorMiddleware } from './middlewares/IErrorMiddleware';
 
+const errorHandler: IErrorMiddleware = container.resolve<IErrorMiddleware>('IErrorMiddleware');
 // Debug configuration
 const debug: Debug.IDebugger = Debug('app.ts');
 
@@ -48,6 +51,10 @@ routes.push(new FreshdeskFooterRoutes(app));
 app.get('/', (req, res) => {
     res.status(200).send('This is working');
 });
+
+//Error and Invalid path handling middlewares
+app.use(errorHandler.handleError);
+app.use(errorHandler.handleInvalidPath);
 
 // Server activation
 server.listen(envVar.port, () => {

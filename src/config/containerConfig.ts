@@ -2,6 +2,7 @@ import 'reflect-metadata';
 import { container } from 'tsyringe';
 import { FreshdeskFooterService } from '../services/FreshdeskFooterService';
 import { FreshdeskApiService } from '../services/FreshdeskApiService';
+import { ErrorHandlerMiddleware } from '../middlewares/ErrorHandlerMiddleware';
 
 class ContainerConfig {
     static configure() {
@@ -11,6 +12,10 @@ class ContainerConfig {
 
         container.register('FreshdeskApiService', {
             useClass: FreshdeskApiService,
+        });
+
+        container.register('IErrorMiddleware', {
+            useClass: ErrorHandlerMiddleware,
         });
     }
 }
