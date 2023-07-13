@@ -1,8 +1,5 @@
 //TODO: set up middleware for authentication
-//TODO: set up middleware for checking request
 //TODO: Setup Docker
-//TODO: logging
-//TODO: Tests :)
 
 // modules import
 import 'reflect-metadata';
@@ -37,7 +34,7 @@ process.on('SIGINT', () => {
 
 // App configuration
 const app = express();
-app.use(express.json());
+//app.use(express.json());
 const server: http.Server = http.createServer(app);
 app.use(helmet());
 app.use(cors());

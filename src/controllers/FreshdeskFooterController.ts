@@ -44,11 +44,12 @@ export class FreshdeskFooterController {
     //  [put]/agents/footers
     putAllFooters = async (req: Request, res: Response, next: NextFunction) => {
         try {
-            const footer = req.body.newFooter;
-            if (!footer) {
-                throw new HtmlError('Missing property: newFooter', 400);
+            const footer = req.body;
+
+            if (typeof footer !== 'string' || footer.trim() === '') {
+                throw new HtmlError('The request body must not be empty and must be a string! (Content-Type: text/plain)', 400);
             }
-            this._freshdeskService.putAllFooters(footer);
+            this._freshdeskService.putAllFooters(<string>footer);
             res.send('Footers are being changed...: ' + footer);
         } catch (error) {
             next(error);

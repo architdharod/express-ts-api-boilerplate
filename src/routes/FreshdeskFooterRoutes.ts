@@ -14,7 +14,7 @@ export class FreshdeskFooterRoutes extends CommonRoutesConfig {
     configureRoutes() {
         this.app.route('/agents/:id/footers').get(freshdeskFooterController.getAgentFooter);
         this.app.route('/agents/footers').get(freshdeskFooterController.getFooters);
-        this.app.route('/agents/footers').put(freshdeskFooterController.putAllFooters);
+        this.app.route('/agents/footers').put(express.text(), freshdeskFooterController.putAllFooters);
         return this.app;
     }
 }
