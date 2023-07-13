@@ -3,8 +3,8 @@ import { z } from 'zod';
 export const FreshdeskAgentSchema = z.object({
     available: z.boolean(),
     occasional: z.boolean(),
-    signature: z.string().nullable(),
     id: z.number(),
+    signature: z.string().nullable(),
     ticket_scope: z.number(),
     created_at: z.string(),
     updated_at: z.string(),

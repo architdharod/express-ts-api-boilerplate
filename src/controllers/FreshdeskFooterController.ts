@@ -1,6 +1,7 @@
-import { Request, Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
 import { IFreshdeskFooterService } from '../services/IFreshdeskFooterService';
 import { injectable, inject } from 'tsyringe';
+import { HtmlError } from '../utils/HtmlError';
 
 @injectable()
 export class FreshdeskFooterController {
@@ -11,20 +12,23 @@ export class FreshdeskFooterController {
     }
 
     //  [get]/agents/:id/footers
-    getAgentFooter = async (req: Request, res: Response) => {
-        const idParam = parseInt(req.params.id);
-        if (isNaN(idParam)) {
-            throw new Error('No valid Id Provided!!');
+    getAgentFooter = async (req: Request, res: Response, next: NextFunction) => {
+        try {
+            const idParam = parseInt(req.params.id);
+            if (isNaN(idParam)) {
+                throw new HtmlError('Agent ID has to be a number. Correct usage: /agents/[number]/footers', 400);
+            }
+            const footer = await this._freshdeskService.getFooterByID(idParam);
+            res.send(footer);
+        } catch (error) {
+            next(error);
         }
-        const footer = await this._freshdeskService.getFooterByID(idParam);
-        res.send(footer);
     };
 
     //  [get]/agents/footers (with optional query: ?email=:email)
-    getFooters = async (req: Request, res: Response) => {
-        const email = <string>req.query.email;
-
+    getFooters = async (req: Request, res: Response, next: NextFunction) => {
         try {
+            const email = <string>req.query.email;
             let footers;
             if (email) {
                 footers = await this._freshdeskService.getFooterByEmail(email);
@@ -33,14 +37,21 @@ export class FreshdeskFooterController {
             }
             res.json(footers).status(200);
         } catch (error) {
-            //throw or handle error here.
+            next(error);
         }
     };
 
     //  [put]/agents/footers
-    putAllFooters = async (req: Request, res: Response) => {
-        const footer = req.body.newFooter;
-        this._freshdeskService.putAllFooters(footer);
-        res.send('footer changed');
+    putAllFooters = async (req: Request, res: Response, next: NextFunction) => {
+        try {
+            const footer = req.body.newFooter;
+            if (!footer) {
+                throw new HtmlError('Missing property: newFooter', 400);
+            }
+            //this._freshdeskService.putAllFooters(footer);
+            res.send('Footers are being changed...: ' + footer);
+        } catch (error) {
+            next(error);
+        }
     };
 }

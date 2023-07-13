@@ -1,7 +1,5 @@
-//TODO: error handeling with middleware
 //TODO: set up middleware for authentication
-//TODO: set up middleware for checking requrest
-//TODO: Check how well the code aligns with SOLID principles
+//TODO: set up middleware for checking request
 //TODO: Setup Docker
 //TODO: logging
 //TODO: Tests :)
@@ -39,6 +37,7 @@ process.on('SIGINT', () => {
 
 // App configuration
 const app = express();
+app.use(express.json());
 const server: http.Server = http.createServer(app);
 app.use(helmet());
 app.use(cors());
