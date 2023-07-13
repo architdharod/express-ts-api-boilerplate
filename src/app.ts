@@ -19,6 +19,7 @@ import envVar from './config/environmentVariables';
 import { CommonRoutesConfig } from './routes/commonRoutesConfig';
 import { FreshdeskFooterRoutes } from './routes/FreshdeskFooterRoutes';
 import { IErrorMiddleware } from './middlewares/IErrorMiddleware';
+import AuthMiddleware from './middlewares/AuthMiddleware';
 
 const errorHandler: IErrorMiddleware = container.resolve<IErrorMiddleware>('IErrorMiddleware');
 // Debug configuration
@@ -34,19 +35,24 @@ process.on('SIGINT', () => {
 
 // App configuration
 const app = express();
-//app.use(express.json());
 const server: http.Server = http.createServer(app);
 app.use(helmet());
 app.use(cors());
 
+// Test endpoint for Docker
+app.get('/health', (req, res) => {
+    res.status(200).send('OK');
+});
+app.get('/', (req, res) => {
+    res.status(200).send('OK');
+});
+
+//authentication middleware
+app.use(AuthMiddleware.apiKeyAuthentication);
+
 //Routs configuration
 const routes: Array<CommonRoutesConfig> = [];
 routes.push(new FreshdeskFooterRoutes(app));
-
-// Test endpoint
-app.get('/', (req, res) => {
-    res.status(200).send('This is working');
-});
 
 //Error and Invalid path handling middlewares
 app.use(errorHandler.handleError);

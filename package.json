@@ -34,6 +34,7 @@
         "typescript": "^5.0.4"
     },
     "dependencies": {
+        "argon2": "^0.30.3",
         "axios": "^1.4.0",
         "cors": "^2.8.5",
         "debug": "^4.3.4",

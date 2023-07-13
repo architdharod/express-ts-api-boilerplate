@@ -30,7 +30,7 @@ export class FreshdeskFooterService implements IFreshdeskFooterService {
         // 3. Check and modify the footers
         if (allAgentsObject.length === parsedInformationObject.successfullyParsedCount) {
             const updatedInformation = parsedInformationObject.idSignatureArray.map((agent: { id: number; signature: string | null }) => {
-                console.log('TEST: \n ' + this.modifySignature(agent.signature, newFooter) + '\n \n');
+                //console.log('TEST: \n ' + this.modifySignature(agent.signature, newFooter) + '\n \n');
                 return {
                     id: agent.id,
                     signature: this.modifySignature(agent.signature, newFooter),

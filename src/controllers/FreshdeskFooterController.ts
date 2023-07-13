@@ -50,7 +50,7 @@ export class FreshdeskFooterController {
                 throw new HtmlError('The request body must not be empty and must be a string! (Content-Type: text/plain)', 400);
             }
             this._freshdeskService.putAllFooters(<string>footer);
-            res.send('Footers are being changed...: ' + footer);
+            res.send('Footers are being updated: \n' + footer);
         } catch (error) {
             next(error);
         }
