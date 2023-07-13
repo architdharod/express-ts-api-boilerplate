@@ -1,6 +1,3 @@
-//TODO: set up middleware for authentication
-//TODO: Setup Docker
-
 // modules import
 import 'reflect-metadata';
 import express from 'express';
