@@ -19,8 +19,10 @@ export class FreshdeskFooterService implements IFreshdeskFooterService {
     };
 
     putAllFooters = async (newFooter: string): Promise<void> => {
-        // 1. get all agent info
-        const allAgentsObject = await this._freshdeskApiService.getAllAgents();
+        // 1. get all agent info (from page 1 through 2. Read Freshdesk API docs for more details)
+        const objectArray1 = await this._freshdeskApiService.getAllAgents(1);
+        const objectArray2 = await this._freshdeskApiService.getAllAgents(2);
+        const allAgentsObject = [...objectArray1, ...objectArray2];
 
         // 2. extract all the footers
         const parsedInformationObject = this.extractIdAndSignature(allAgentsObject);
@@ -36,7 +38,7 @@ export class FreshdeskFooterService implements IFreshdeskFooterService {
             });
 
             // 4. perform post requests for every agent in the list!
-            //await this.performPostRequests(updatedInformation);
+            await this.performPostRequests(updatedInformation);
         } else {
             throw new HtmlError('Internal server error: Could not update all the signatures', 500);
         }
@@ -52,7 +54,7 @@ export class FreshdeskFooterService implements IFreshdeskFooterService {
     };
 
     getAllFooters = async (): Promise<FreshdeskAgent[]> => {
-        const AgentsObject = await this._freshdeskApiService.getAllAgents();
+        const AgentsObject = await this._freshdeskApiService.getAllAgents(1);
         return AgentsObject;
     };
 
@@ -99,7 +101,7 @@ export class FreshdeskFooterService implements IFreshdeskFooterService {
         for (const data of updatedInformation) {
             try {
                 const response = await this._freshdeskApiService.putSignature(data.id, { signature: data.signature });
-                debug('Request succeeded:', response[0]);
+                debug('Request succeeded for ' + data.id);
             } catch (error) {
                 console.log(`ERROR in FreshdeskFooterService.performPostRequest()` + error);
             }
