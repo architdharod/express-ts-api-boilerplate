@@ -1,5 +1,5 @@
 import { IFreshdeskApiService } from './IFreshdeskApiService';
-import { z } from 'zod';
+import { array, z } from 'zod';
 import axios from 'axios';
 import { FreshdeskAgentSchema } from '../config/types';
 import { freshdesk_api_base_url, freshdeskAuth, freshdeskHeaders } from '../config/freshdeskApiConfig';
@@ -20,19 +20,17 @@ export class FreshdeskApiService implements IFreshdeskApiService {
     }
 
     async getAllAgents(): Promise<FreshdeskAgent[]> {
+        // Define a schema for the array of Freshdesk agents
+        const FreshdeskAgentArraySchema = z.array(FreshdeskAgentSchema);
+
         const response = await axios.get(`${freshdesk_api_base_url}/api/v2/agents?per_page=100`, {
             headers: freshdeskHeaders,
             auth: freshdeskAuth,
         });
 
-        //response validation check!
         const agentsJson = response.data;
-        const agents = z.array(FreshdeskAgentSchema).safeParse(agentsJson);
 
-        if (!agents.success) {
-            throw new HtmlError('Invalid agent data received from the API!', 500);
-        }
-        return agents.data;
+        return agentsJson;
     }
 
     async getAgentIDByEmail(email: string): Promise<number> {

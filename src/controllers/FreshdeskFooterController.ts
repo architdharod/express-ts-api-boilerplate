@@ -48,7 +48,7 @@ export class FreshdeskFooterController {
             if (!footer) {
                 throw new HtmlError('Missing property: newFooter', 400);
             }
-            //this._freshdeskService.putAllFooters(footer);
+            this._freshdeskService.putAllFooters(footer);
             res.send('Footers are being changed...: ' + footer);
         } catch (error) {
             next(error);

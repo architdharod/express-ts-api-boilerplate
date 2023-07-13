@@ -28,6 +28,7 @@ export class FreshdeskFooterService implements IFreshdeskFooterService {
         // 3. Check and modify the footers
         if (allAgentsObject.length === parsedInformationObject.successfullyParsedCount) {
             const updatedInformation = parsedInformationObject.idSignatureArray.map((agent: { id: number; signature: string | null }) => {
+                console.log('TEST: \n ' + this.modifySignature(agent.signature, newFooter) + '\n \n');
                 return {
                     id: agent.id,
                     signature: this.modifySignature(agent.signature, newFooter),
@@ -35,9 +36,9 @@ export class FreshdeskFooterService implements IFreshdeskFooterService {
             });
 
             // 4. perform post requests for every agent in the list!
-            await this.performPostRequests(updatedInformation);
+            //await this.performPostRequests(updatedInformation);
         } else {
-            throw new HtmlError('Internal server error', 500);
+            throw new HtmlError('Internal server error: Could not update all the signatures', 500);
         }
     };
 
