@@ -61,4 +61,11 @@ server.listen(envVar.port, () => {
         debug(`Routes configured for ${route.getName()}`);
     });
     debug(`server is listning on port: ${envVar.port}`);
+    console.log(`
+    ╔═╗┌─┐┌┐┌┌─┐┬─┐┌─┐┌┬┐┬ ┬┬  ┌─┐┌┬┐┬┌─┐┌┐┌┌─┐┬
+    ║  │ │││││ ┬├┬┘├─┤ │ │ ││  ├─┤ │ ││ ││││└─┐│
+    ╚═╝└─┘┘└┘└─┘┴└─┴ ┴ ┴ └─┘┴─┘┴ ┴ ┴ ┴└─┘┘└┘└─┘o
+    ╔╦╗┬ ┬┬┌─┐  ┬ ┬┌─┐┬─┐┬┌─┌─┐                 
+     ║ ├─┤│└─┐  ││││ │├┬┘├┴┐└─┐                 
+     ╩ ┴ ┴┴└─┘  └┴┘└─┘┴└─┴ ┴└─┘o                `);
 });
