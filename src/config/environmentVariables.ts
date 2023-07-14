@@ -23,7 +23,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 // Define your environment variables
 const envVar = {
-    port: <string>process.env.PORT,
+    port: 3000,
     freshdeskApiUsername: <string>process.env.FRESHDESK_API_USERNAME,
     freshdeskApiPassword: <string>process.env.FRESHDESK_API_PASSWORD,
     // ... add more variables as needed
