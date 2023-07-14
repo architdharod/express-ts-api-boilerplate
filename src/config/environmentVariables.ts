@@ -4,7 +4,7 @@ import Debug from 'debug';
 // Debug configuration
 const debug: Debug.IDebugger = Debug('config/index.ts');
 
-// specify the path of the .env file based on the NODE_ENV
+/* // specify the path of the .env file based on the NODE_ENV
 let envPath;
 const nodeEnv = process.env.NODE_ENV;
 if (nodeEnv === 'test') {
@@ -15,7 +15,11 @@ if (nodeEnv === 'test') {
     envPath = '.env';
 }
 
-dotenv.config({ path: envPath });
+dotenv.config({ path: envPath }); */
+
+if (process.env.NODE_ENV !== 'production') {
+    require('dotenv').config();
+}
 
 // Define your environment variables
 const envVar = {
