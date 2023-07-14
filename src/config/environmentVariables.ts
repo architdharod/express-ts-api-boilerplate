@@ -32,10 +32,11 @@ function checkEnvVariables(variables: Record<string, string | undefined>) {
     Object.entries(variables).forEach(([key, value]) => {
         if (typeof value === 'undefined' || value === null) {
             debug(`"${key}" environment variable is not defined`);
+            console.log(`"${key}" environment variable is not defined`);
             process.exit(1); // Exit the process with a "failure" code
         }
     });
 }
 
 // Check all environment variables
-checkEnvVariables(envVar);
+//checkEnvVariables(envVar);
